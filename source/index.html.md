@@ -1,17 +1,17 @@
 ---
-title: API Reference
+title: Dorsia API Reference
 
 language_tabs:
-  - shell
-  - ruby
-  - python
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - users
+  - rooms
+  - reservations
+  - customers
   - errors
 
 search: true
@@ -19,171 +19,72 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Dorsia API! Dorsia is a reference to the cult classic movie American Psycho.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+This API is built to place reservations and retrieve room information for your company.
+At this moment, only one company has been registered, so this documentation is made for employees of that specific company.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+For more information, questions, or on how to register your company, please
+send me a mail at fabiantjoeaon@gmail.com.
+
+Dorsia API is build on top of Laravel and returns only and only JSON responses.
 
 # Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
+> For demonstration purposes, an example API call using the Fetch API has been illustrated below:
 
 ```javascript
-const kittn = require('kittn');
+import 'whatwg-fetch';
 
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+try {
+  fetch('https://www.dorsia.fabiantjoeaon.com/api/v1/login', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'email': 'your_email',
+      'password': 'your_password'
+    })
+  })
+  .then(res => res.json())
+  .then((data) => {
+    console.log(data);
+  });
+} catch(e) {
+  console.log(e);
 }
 ```
 
-This endpoint retrieves a specific kitten.
+> The above command returns JSON structured like this:
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+```json
+[{
+  "token": {
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIyLCJpc3MiOiJodHRwczpcL1wvZG9yc2lhLmZhYmlhbnRqb2Vhb24uY29tXC9hcGlcL3YxXC9sb2dpbiIsImlhdCI6MTQ4NDEyNTI2OSwiZXhwIjoxNDg0MTI4ODY5LCJuYmYiOjE0ODQxMjUyNjksImp0aSI6ImZhY2ZjYjU2NDJiYjFkNDY4OGI2NTllMWM0NzQ3ZTc4In0.LOgchsjEmwNL5WRIcHsYEnDMz1DJn5uG0T8vtQKi7GE"
+  },
+  "user": {
+    "id": 22,
+    "email": "your_email",
+    "name": "Your Name",
+    "remember_token": null,
+    "created_at": "2016-12-20 17:45:55",
+    "updated_at": null
+  }
+}]
+```
 
-### HTTP Request
+> Make sure to replace `your_email` and `your_password` with your credentials.
 
-`GET http://example.com/kittens/<ID>`
+Dorsia uses JSON Web Tokens for authentication. Due to business logic and security measurements, you can not register as a user, as only employees are registered users.
+If you are an employee, and you are not yet registered, please contact your supervisor.
 
-### URL Parameters
+Dorsia automatically generates an temporary JSON key, which is valid for an hour.
+You can retrieve your token by POSTing your username and password to this URL:
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+`POST https://www.dorsia.fabiantjoeaon.com/api/v1/login`
 
+<aside class="notice">
+Please keep in mind to log out users when this key turns invalid (it lasts for an hour).
+</aside>
