@@ -280,6 +280,8 @@ TOKEN | Your JSON web token
 
 ## Place a new reservation
 
+
+
 ## Edit an existing reservation
 
 ## Delete a reservation
