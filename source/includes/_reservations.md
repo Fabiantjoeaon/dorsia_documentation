@@ -44,7 +44,7 @@
         "BSN": 123456,
         "first_name": "Jurrian",
         "last_name": "Lammerts",
-        "email": "jurraboii@keta.nl",
+        "email": "jurrianlammerts@hotmail.com",
         "user_id": 22,
         "created_at": "2017-01-11 10:03:14",
         "updated_at": "2017-01-11 10:03:14"
@@ -279,6 +279,24 @@ USER_ID | The user to retrieve reservations for
 TOKEN | Your JSON web token
 
 ## Place a new reservation
+
+### HTTP Request
+
+`POST https://dorsia.fabiantjoeaon.com/api/v1/rooms/<TOKEN>`
+
+### POST Parameters
+
+Parameter | Description
+--------- | -----------
+start_date_time | The starting date and time for the reservation, formatted YYYY-MM-DD H:M:S
+length_minutes | The length in minutes of the reservation
+end_date_time | The end date and time for the reservation, formatted YYYY-MM-DD H:M:S
+activity | The activity of the reservation
+description | The description of the reservation
+number_persons | The number of persons for this reservation (should not exceed the room capacity!)
+customer_id | The ID for the customer for this reservation
+room_id | The ID for the room for this reservation
+TOKEN | Your JSON web token
 
 
 
