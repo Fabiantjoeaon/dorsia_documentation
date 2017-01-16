@@ -236,7 +236,7 @@ This endpoint retrieves all reservations for a specific room
 
 ### HTTP Request
 
-`GET https://dorsia.fabiantjoeaon.com/api/v1/rooms/<ROOM_ID>/reservations/<TOKEN>`
+`GET https://dorsia.fabiantjoeaon.com/api/v1/reservations/<ROOM_ID>/reservations/<TOKEN>`
 
 ### URL Parameters
 
@@ -269,7 +269,7 @@ This endpoint retrieves all reservations for a specific user
 
 ### HTTP Request
 
-`GET https://dorsia.fabiantjoeaon.com/api/v1/rooms/<USER_ID>/reservations/<TOKEN>`
+`GET https://dorsia.fabiantjoeaon.com/api/v1/reservations/<USER_ID>/reservations/<TOKEN>`
 
 ### URL Parameters
 
@@ -279,10 +279,19 @@ USER_ID | The user to retrieve reservations for
 TOKEN | Your JSON web token
 
 ## Place a new reservation
+> A valid response (status code 200) from this endpoint with an id of 18 returns JSON structured like this:
+
+```json
+{
+  "id": 18
+}
+```
 
 ### HTTP Request
 
-`POST https://dorsia.fabiantjoeaon.com/api/v1/rooms/<TOKEN>`
+`POST https://dorsia.fabiantjoeaon.com/api/v1/reservations/<TOKEN>`
+
+This endpoint saves a new reservation
 
 ### POST Parameters
 
@@ -301,5 +310,50 @@ TOKEN | Your JSON web token
 
 
 ## Edit an existing reservation
+> A valid response (status code 200) from this endpoint with an id of 18 returns JSON structured like this:
+
+```json
+{
+  "id": 18
+}
+```
+
+### HTTP Request
+
+`PUT https://dorsia.fabiantjoeaon.com/api/v1/reservations/<RESERVATION_ID>/<TOKEN>`
+
+This endpoint edits a reservation by given ID
+
+### POST Parameters
+
+Parameter | Description
+--------- | -----------
+start_date_time | The starting date and time for the reservation, formatted YYYY-MM-DD H:M:S
+length_minutes | The length in minutes of the reservation
+end_date_time | The end date and time for the reservation, formatted YYYY-MM-DD H:M:S
+activity | The activity of the reservation
+description | The description of the reservation
+number_persons | The number of persons for this reservation (should not exceed the room capacity!)
+customer_id | The ID for the customer for this reservation
+room_id | The ID for the room for this reservation
+RESERVATION_ID | The ID for the reservation to edit
+TOKEN | Your JSON web token
 
 ## Delete a reservation
+> A valid response (status code 200) from this endpoint with an id of 18 returns JSON structured like this:
+
+```json
+{
+  "activity": "This is a activity"
+}
+```
+
+<aside class="notice">
+  Note that only reservations made by you can be deleted!
+</aside>
+
+This endpoint deletes your reservation by a given ID
+
+### HTTP Request
+
+`DELETE https://dorsia.fabiantjoeaon.com/api/v1/reservations/<RESERVATION_ID>/<TOKEN>`
