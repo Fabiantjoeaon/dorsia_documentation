@@ -460,7 +460,7 @@ Please keep in mind to log out users when this key turns invalid (it lasts for a
         </span><span class="nt">"BSN"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
         </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jurrian"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lammerts"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jurraboii@keta.nl"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jurrianlammerts@hotmail.com"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
         </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-11 10:03:14"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-01-11 10:03:14"</span><span class="w">
@@ -689,7 +689,7 @@ Please keep in mind to log out users when this key turns invalid (it lasts for a
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://dorsia.fabiantjoeaon.com/api/v1/rooms/&lt;ROOM_ID&gt;/reservations/&lt;TOKEN&gt;</code></p>
+<p><code class="prettyprint">GET https://dorsia.fabiantjoeaon.com/api/v1/reservations/&lt;ROOM_ID&gt;/reservations/&lt;TOKEN&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -733,7 +733,7 @@ Please keep in mind to log out users when this key turns invalid (it lasts for a
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://dorsia.fabiantjoeaon.com/api/v1/rooms/&lt;USER_ID&gt;/reservations/&lt;TOKEN&gt;</code></p>
+<p><code class="prettyprint">GET https://dorsia.fabiantjoeaon.com/api/v1/reservations/&lt;USER_ID&gt;/reservations/&lt;TOKEN&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -755,25 +755,452 @@ Please keep in mind to log out users when this key turns invalid (it lasts for a
 
 <h2 id="place-a-new-reservation">Place a new reservation</h2>
 
+<blockquote>
+<p>A valid response (status code 200) from this endpoint with an id of 18 returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://dorsia.fabiantjoeaon.com/api/v1/reservations/&lt;TOKEN&gt;</code></p>
+
+<p>This endpoint saves a new reservation</p>
+
+<h3 id="post-parameters">POST Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start_date_time</td>
+<td>The starting date and time for the reservation, formatted YYYY-MM-DD H:M:S</td>
+</tr>
+<tr>
+<td>length_minutes</td>
+<td>The length in minutes of the reservation</td>
+</tr>
+<tr>
+<td>end_date_time</td>
+<td>The end date and time for the reservation, formatted YYYY-MM-DD H:M:S</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>The activity of the reservation</td>
+</tr>
+<tr>
+<td>description</td>
+<td>The description of the reservation</td>
+</tr>
+<tr>
+<td>number_persons</td>
+<td>The number of persons for this reservation (should not exceed the room capacity!)</td>
+</tr>
+<tr>
+<td>customer_id</td>
+<td>The ID for the customer for this reservation</td>
+</tr>
+<tr>
+<td>room_id</td>
+<td>The ID for the room for this reservation</td>
+</tr>
+<tr>
+<td>TOKEN</td>
+<td>Your JSON web token</td>
+</tr>
+</tbody></table>
+
 <h2 id="edit-an-existing-reservation">Edit an existing reservation</h2>
 
+<blockquote>
+<p>A valid response (status code 200) from this endpoint with an id of 18 returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PUT https://dorsia.fabiantjoeaon.com/api/v1/reservations/&lt;RESERVATION_ID&gt;/&lt;TOKEN&gt;</code></p>
+
+<p>This endpoint edits a reservation by given ID</p>
+
+<h3 id="post-parameters">POST Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>start_date_time</td>
+<td>The starting date and time for the reservation, formatted YYYY-MM-DD H:M:S</td>
+</tr>
+<tr>
+<td>length_minutes</td>
+<td>The length in minutes of the reservation</td>
+</tr>
+<tr>
+<td>end_date_time</td>
+<td>The end date and time for the reservation, formatted YYYY-MM-DD H:M:S</td>
+</tr>
+<tr>
+<td>activity</td>
+<td>The activity of the reservation</td>
+</tr>
+<tr>
+<td>description</td>
+<td>The description of the reservation</td>
+</tr>
+<tr>
+<td>number_persons</td>
+<td>The number of persons for this reservation (should not exceed the room capacity!)</td>
+</tr>
+<tr>
+<td>customer_id</td>
+<td>The ID for the customer for this reservation</td>
+</tr>
+<tr>
+<td>room_id</td>
+<td>The ID for the room for this reservation</td>
+</tr>
+<tr>
+<td>RESERVATION_ID</td>
+<td>The ID for the reservation to edit</td>
+</tr>
+<tr>
+<td>TOKEN</td>
+<td>Your JSON web token</td>
+</tr>
+</tbody></table>
+
 <h2 id="delete-a-reservation">Delete a reservation</h2>
+
+<blockquote>
+<p>A valid response (status code 200) from this endpoint with an id of 18 returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"activity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a activity"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<aside class="notice">
+  Note that only reservations made by you can be deleted!
+</aside>
+
+<p>This endpoint deletes your reservation by a given ID</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://dorsia.fabiantjoeaon.com/api/v1/reservations/&lt;RESERVATION_ID&gt;/&lt;TOKEN&gt;</code></p>
 
           <h1 id="customers">Customers</h1>
 
 <h2 id="get-your-customers">Get your customers</h2>
 
+<blockquote>
+<p>A valid response (status code 200) from this endpoint returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"BSN"</span><span class="p">:</span><span class="w"> </span><span class="mi">214</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Geovany"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turner"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brielle61@yahoo.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"BSN"</span><span class="p">:</span><span class="w"> </span><span class="mi">287</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pietro"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Funk"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rodolfo37@mann.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves your customers</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://dorsia.fabiantjoeaon.com/api/v1/me/custuomers/&lt;TOKEN&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>TOKEN</td>
+<td>Your JSON web token</td>
+</tr>
+</tbody></table>
+
 <h2 id="get-all-customers">Get all customers</h2>
 
-<h2 id="get-a-specific-customer">Get a specific customer</h2>
+<blockquote>
+<p>A valid response (status code 200) from this endpoint returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"BSN"</span><span class="p">:</span><span class="w"> </span><span class="mi">214</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Geovany"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turner"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brielle61@yahoo.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"BSN"</span><span class="p">:</span><span class="w"> </span><span class="mi">287</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pietro"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Funk"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rodolfo37@mann.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all customers</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://dorsia.fabiantjoeaon.com/api/v1/customers/&lt;TOKEN&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>TOKEN</td>
+<td>Your JSON web token</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-a-specific-customer-by-id">Get a specific customer by ID</h2>
+
+<blockquote>
+<p>A valid response (status code 200) from this endpoint with ID 2 returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"BSN"</span><span class="p">:</span><span class="w"> </span><span class="mi">214</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Geovany"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turner"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brielle61@yahoo.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a specific customer</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://dorsia.fabiantjoeaon.com/api/v1/reservations/&lt;ID&gt;/&lt;TOKEN&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the reservation to retrieve</td>
+</tr>
+<tr>
+<td>TOKEN</td>
+<td>Your JSON web token</td>
+</tr>
+</tbody></table>
 
 <h2 id="get-customers-by-a-specific-reservation">Get customers by a specific reservation</h2>
 
+<blockquote>
+<p>A valid response (status code 200) from this endpoint with a reservation ID of 2 returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"BSN"</span><span class="p">:</span><span class="w"> </span><span class="mi">214</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Geovany"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Turner"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brielle61@yahoo.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"BSN"</span><span class="p">:</span><span class="w"> </span><span class="mi">287</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pietro"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Funk"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rodolfo37@mann.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all customers for a specific reservation</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://dorsia.fabiantjoeaon.com/api/v1/reservations/&lt;RESERVATION_ID&gt;/customers/&lt;TOKEN&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RESERVATION_ID</td>
+<td>The reservation to retrieve customers for</td>
+</tr>
+<tr>
+<td>TOKEN</td>
+<td>Your JSON web token</td>
+</tr>
+</tbody></table>
+
 <h2 id="add-a-new-customer">Add a new customer</h2>
+
+<blockquote>
+<p>A valid response (status code 200) from this endpoint with an id of 18 returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://dorsia.fabiantjoeaon.com/api/v1/customers/&lt;TOKEN&gt;</code></p>
+
+<p>This endpoint saves a new customer</p>
+
+<h3 id="post-parameters">POST Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>first_name</td>
+<td>The customers first name</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>The customers last name</td>
+</tr>
+<tr>
+<td>email</td>
+<td>The customers email</td>
+</tr>
+<tr>
+<td>BSN</td>
+<td>The customers social security number</td>
+</tr>
+<tr>
+<td>TOKEN</td>
+<td>Your JSON web token</td>
+</tr>
+</tbody></table>
 
 <h2 id="edit-an-existing-customer">Edit an existing customer</h2>
 
+<aside class="notice">
+  Note that the BSN key is in capital letters!
+</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://dorsia.fabiantjoeaon.com/api/v1/customers/&lt;ID&gt;/&lt;TOKEN&gt;</code></p>
+
+<p>This endpoint edits an existing customer by a given ID</p>
+
+<h3 id="post-parameters">POST Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>first_name</td>
+<td>The customers first name</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>The customers last name</td>
+</tr>
+<tr>
+<td>email</td>
+<td>The customers email</td>
+</tr>
+<tr>
+<td>BSN</td>
+<td>The customers social security number</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>The customer to edit</td>
+</tr>
+<tr>
+<td>TOKEN</td>
+<td>Your JSON web token</td>
+</tr>
+</tbody></table>
+
 <h2 id="delete-a-customer">Delete a customer</h2>
+
+<blockquote>
+<p>A valid response (status code 200) from this endpoint with an id of 18 returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customers first name"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customers last name"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<aside class="notice">
+  Note that only customers made by you can be deleted!
+</aside>
+
+<p>This endpoint deletes your customer by a given ID</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://dorsia.fabiantjoeaon.com/api/v1/customer/&lt;CUSTOMER_ID&gt;/&lt;TOKEN&gt;</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CUSTOMER_ID</td>
+<td>The customer to delete</td>
+</tr>
+<tr>
+<td>TOKEN</td>
+<td>Your JSON web token</td>
+</tr>
+</tbody></table>
 
           <h1 id="errors">Errors</h1>
 
